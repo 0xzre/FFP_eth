@@ -128,7 +128,7 @@
 						"type": "address"
 					}
 				],
-				"name": "clubRevenue",
+				"name": "currentclubRevenue",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -175,6 +175,11 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "wallet",
+						"type": "address"
+					},
+					{
 						"internalType": "string",
 						"name": "walletType",
 						"type": "string"
@@ -200,7 +205,7 @@
 						"type": "address"
 					}
 				],
-				"name": "spentRevenue",
+				"name": "spentClubRevenue",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -351,11 +356,11 @@
 			]
 		},
 		"contracts/FFP.sol": {
-			"keccak256": "0x5b4ee5ecd48efb38ef08216f71ca68ebf045645e019f21b3bb405e8e7ad6f2b5",
+			"keccak256": "0xec308c69162a353425bd1bec145cdcd472a5e3e28761ae13807abf95ebc13dff",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4c00148522aa5bff91985f9893096ba8fa1e16c1503056120648dc20c11b762b",
-				"dweb:/ipfs/QmcqeVYPnzJEVcZY2K6ceyvW22giJnVCkKZ5hVYY4BSHPH"
+				"bzz-raw://1142a2db91c20601dd4373baa7fc94f88c5e86c194f80066bef3ba2c7330d572",
+				"dweb:/ipfs/QmWqcEw57fruF4m8xCtaMJvsbm2D4zgjkWMZBKWustUK7j"
 			]
 		}
 	},
