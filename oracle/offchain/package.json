@@ -1,31 +1,33 @@
 {
-  "name": "onchain",
-  "version": "0.2.0",
-  "description": "",
-  "main": "lib/index.js",
+  "name": "offchain",
+  "version": "1.0.0",
+  "description": "offchain node for oracle API",
+  "main": "index.js",
   "scripts": {
     "develop": "nodemon --exec babel-node src",
-    "test": "mocha --require @babel/register",
+    "test": "mocha --require babel-core/register",
     "build": "rimraf lib && babel src -d lib",
     "start": "node lib",
     "lint": "eslint src"
   },
   "author": "El",
-  "license": "MIT",
-  "private": false,
-  "devDependencies": {
-    "@babel/cli": "^7.22.0",
-    "@babel/core": "^7.22.0",
-    "@babel/preset-env": "^7.22.0",
-    "eslint": "^8.51.0",
-    "mocha": "^10.2.0",
-    "nodemon": "^3.0.1",
-    "rimraf": "^5.0.1"
-  },
+  "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "axios": "^1.5.0",
-    "@truffle/hdwallet-provider": "^2.0.16",
-    "web3": "^1.10.0"
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.0",
+    "@babel/node": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^9.17.0",
+    "offchain": "file:",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
+    "rimraf": "^6.0.1",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^4.16.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }

@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "ffp-oracle": "file:",
     "ganache-cli": "^6.12.2",
     "truffle": "^5.11.3",
     "truffle-hdwallet-provider": "^1.0.17"
