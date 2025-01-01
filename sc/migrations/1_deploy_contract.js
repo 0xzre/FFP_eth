@@ -1,5 +1,7 @@
 var FFP = artifacts.require("../contracts/FinancialFairPlayTransfers.sol");
+var dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = function (deployer, network) {
-  deployer.deploy(FFP,"0x1fa272829f1ee075c21a60ea4237867fb881de31");
+  deployer.deploy(FFP,process.env.SCAddress);
 };
