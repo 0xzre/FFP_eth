@@ -3,16 +3,15 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-// Interface for the Oracle contract
 interface IOracle {
     function createRequest(string memory _urlToQuery, string memory _attributeToFetch) external;
     function updateRequest(uint _id, string memory _valueRetrieved) external;
     event UpdatedRequest(uint id, string urlToQuery, string attributeToFetch, string agreedValue);
 }
 
-contract FinancialFairPlayTransfers is Ownable {
+contract FFP is Ownable {
     IOracle public oracle;
-    uint256 public minPercentage;  // Dynamic min percentage fetched from the Oracle
+    uint256 public minPercentage = 70;  // Dynamic min percentage fetched from the Oracle
 
     struct Wallet {
         string walletType; // "player", "club", "sponsor", etc.
@@ -32,14 +31,24 @@ contract FinancialFairPlayTransfers is Ownable {
         oracle = IOracle(oracleAddress);
     }
 
-    function registerWallet(address wallet, string memory walletType) external onlyOwner {
+    function registerClubWallet(address wallet, uint256 initialClubRevenue) external onlyOwner {
         require(bytes(wallets[wallet].walletType).length == 0, "Wallet already registered");
-        wallets[wallet] = Wallet(walletType, 0);
-        if (keccak256(abi.encodePacked(walletType)) == keccak256(abi.encodePacked("club"))) {
-            currentclubRevenue[wallet] = 0;
-            spentClubRevenue[wallet] = 0;
-        }
-        emit WalletRegistered(wallet, walletType);
+        wallets[wallet] = Wallet("club", 0);
+        currentclubRevenue[wallet] = initialClubRevenue;
+        spentClubRevenue[wallet] = 0;
+        emit WalletRegistered(wallet, "club");
+    }
+
+    function registerPlayerWallet(address wallet) external onlyOwner {
+        require(bytes(wallets[wallet].walletType).length == 0, "Wallet already registered");
+        wallets[wallet] = Wallet("player", 0);
+        emit WalletRegistered(wallet, "player");
+    }
+
+    function registerSponsorWallet(address wallet) external onlyOwner {
+        require(bytes(wallets[wallet].walletType).length == 0, "Wallet already registered");
+        wallets[wallet] = Wallet("sponsor", 0);
+        emit WalletRegistered(wallet, "sponsor");
     }
 
     function deposit() external payable {

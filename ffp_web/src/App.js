@@ -45,12 +45,11 @@ function App() {
   const interactWithContract = async () => {
     if (contract) {
       try {
-        // Replace with actual wallet and type
-        // const tx = await contract.registerWallet(address, "club");
-        console.log('entered interact')
-        const tx = contract.registerWallet(address, "club");
-        const gas = await signer.estimateGas(tx);
-        console.log('gas:', gas);
+        const sign = await provider.getSigner();
+        const addr = await sign.getAddress();
+        console.log('addr', addr);
+        // const tx = await contract.registerWallet(addr, "club");
+        const tx = await contract.wallets(addr);
         console.log("Transaction sent:", tx.hash);
 
         // Wait for the transaction to be mined
