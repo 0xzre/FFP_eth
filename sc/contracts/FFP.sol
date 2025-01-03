@@ -11,7 +11,7 @@ interface IOracle {
 
 contract FFP is Ownable {
     IOracle public oracle;
-    uint256 public minPercentage = 70;  // Change from Oracle
+    uint256 public minPercentage = 70; // Initial value set to 70% (default)
 
     struct Wallet {
         string name;
