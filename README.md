@@ -2,10 +2,11 @@ FFP ETH
 
 ![image](./media/ffp-home.png)
 
-api: api for offchain oracle
-ffp_web: web for FFP client
-offchain-oracle: offchain oracles connecting api and onchain oracle
-sc: Oracle and FFP Smart Contract
+folders
+1. api: api for offchain oracle
+2. ffp_web: web for FFP client
+3. offchain-oracle: offchain oracles connecting api and onchain oracle
+4. sc: Oracle and FFP Smart Contract
 
 Steps:
 1. Initialize network with Kurtosis or Hardhat for dev. Get the private kesy and addresses for the wallets
