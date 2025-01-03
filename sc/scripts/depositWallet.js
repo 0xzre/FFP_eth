@@ -8,7 +8,7 @@ async function main() {
 
   const ffpContract = await ethers.getContractAt("FFP", deployedAddress);
   
-  const tx = await ffpContract.connect(club).deposit({value: ethers.parseEther("100")});
+  const tx = await ffpContract.connect(club).deposit({value: ethers.parseEther("1000")});
   await tx.wait();
   console.log("Deposited as the owner.");
 

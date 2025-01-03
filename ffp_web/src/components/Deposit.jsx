@@ -22,6 +22,7 @@ function Deposit({ contract }) {
     try {
       // Convert ETH amount string to Wei
       const amountWei = ethers.parseEther(amount);
+      console.log("Depositing", amountWei, "Wei to the contract.");
 
       // Call the contract's deposit() function, which applies only to msg.sender
       const tx = await contract.deposit({

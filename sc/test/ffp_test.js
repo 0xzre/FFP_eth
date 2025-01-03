@@ -12,10 +12,10 @@ describe("FFP", function () {
     // await ffpContract.deployed();
 
     // Register wallets
-    await ffpContract.connect(owner).registerClubWallet(club.address, 100);
-    await ffpContract.connect(owner).registerClubWallet(clubOther.address, 50);
-    await ffpContract.connect(owner).registerPlayerWallet(player.address);
-    await ffpContract.connect(owner).registerSponsorWallet(sponsor.address);
+    await ffpContract.connect(owner).registerClubWallet(club.address, "c", 100);
+    await ffpContract.connect(owner).registerClubWallet(clubOther.address, "a", 50);
+    await ffpContract.connect(owner).registerPlayerWallet(player.address, "b");
+    await ffpContract.connect(owner).registerSponsorWallet(sponsor.address, "d");
   });
 
   it("Should register wallets correctly", async function () {
