@@ -11,7 +11,7 @@ interface IOracle {
 
 contract FFP is Ownable {
     IOracle public oracle;
-    uint256 public minPercentage = 70;  // Dynamic min percentage fetched from the Oracle
+    uint256 public minPercentage = 70;  // Change from Oracle
 
     struct Wallet {
         string name;
