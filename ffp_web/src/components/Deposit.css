@@ -1,0 +1,53 @@
+.deposit-container {
+    max-width: 400px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #fefefe;
+}
+
+.deposit-container h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.deposit-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.deposit-container label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.deposit-container input[type="text"],
+.deposit-container input[type="number"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.deposit-container button {
+    align-self: flex-start;
+    padding: 0.6rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.deposit-container button:hover {
+    background-color: #555;
+}
+
+.status-message {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+}

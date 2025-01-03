@@ -1,58 +1,54 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* App.css */
 .app-container {
-  /* Center the content horizontally and vertically (optional) */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  /* Give some spacing around the container */
-  margin: 0 auto;
-  padding: 2rem;
-  max-width: 800px;
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .app-title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #333;
+  margin-bottom: 20px;
+}
+
+.app-status {
+  margin-bottom: 20px;
+}
+
+.app-nav {
+  margin-bottom: 20px;
+}
+
+.app-nav button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  background-color: #ddd;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+.app-nav button:hover {
+  background-color: #ccc;
+}
+
+.app-nav .active {
+  background-color: #333;
+  color: #fff;
+}
+
+.app-content {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+/* You can style TransferForm and HistoryTxns individually too. */
+.transfer-form-container {
+  /* ...styles for the transfer form... */
+}
+
+.history-container {
+  /* ...styles for the history view... */
 }
