@@ -8,7 +8,7 @@ async function main() {
 
   const ffpContract = await ethers.getContractAt("FFP", deployedAddress);
   
-  const tx = await ffpContract.connect(owner).registerClubWallet(clubOther.address, 10000);
+  const tx = await ffpContract.connect(owner).registerClubWallet(club.address, "Stay Humble FC", ethers.parseEther("10000"));
   await tx.wait();
   console.log("Registered club as the owner.");
 
