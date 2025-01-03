@@ -1,17 +1,9 @@
-// import startOracle from "./oracle";
-// import startConsumer from "./consumer";
-// import startClient from "./client";
-
-// startOracle();
-// startConsumer();
-// startClient();
 
 // Import ethers.js
 const { ethers } = require("ethers");
 const dotenv = require('dotenv');
 dotenv.config();
 
-// Define the contract's ABI
 const oracleABI = [
     {
       "anonymous": false,
@@ -180,18 +172,14 @@ const oracleABI = [
     }
   ];
 
-// Define contract address and provider
-const ORACLE_CONTRACT_ADDRESS = process.env.ORACLE_CONTRACT_ADDRESS; // Replace with the contract address
-const provider = new ethers.providers.JsonRpcProvider(process.env.WEB3_PROVIDER_ADDRESS); // Replace with the provider URL
+const ORACLE_CONTRACT_ADDRESS = process.env.ORACLE_CONTRACT_ADDRESS; 
+const provider = new ethers.providers.JsonRpcProvider(process.env.WEB3_PROVIDER_ADDRESS);
 
-// Define a wallet for signing transactions
-const privateKey = process.env.PRIVATE_KEY; // Replace with the private key of the wallet
+const privateKey = process.env.PRIVATE_KEY; 
 const wallet = new ethers.Wallet(privateKey, provider);
 
-// Instantiate the contract
 const oracleContract = new ethers.Contract(ORACLE_CONTRACT_ADDRESS, oracleABI, wallet);
 
-// Function to create a new request
 async function createRequest(urlToQuery, attributeToFetch) {
   try {
     const tx = await oracleContract.createRequest(urlToQuery, attributeToFetch);
@@ -203,7 +191,6 @@ async function createRequest(urlToQuery, attributeToFetch) {
   }
 }
 
-// Function to simulate oracle response
 async function respondToRequest(requestId, valueRetrieved) {
   try {
     const tx = await oracleContract.updateRequest(requestId, valueRetrieved);
@@ -215,25 +202,18 @@ async function respondToRequest(requestId, valueRetrieved) {
   }
 }
 
-// Listen for NewRequest events and simulate off-chain processing
 oracleContract.on("NewRequest", async (id, urlToQuery, attributeToFetch) => {
   console.log(`New Request Received - ID: ${id}, URL: ${urlToQuery}, Attribute: ${attributeToFetch}`);
 
-  // Simulate fetching data from the URL and extracting the attribute
-  // Replace this with actual off-chain logic to fetch and process data
-  const simulatedValue = "SimulatedValue"; // Replace with actual retrieved value
+  const simulatedValue = "SimulatedValue";
 
-  // Respond to the request
   await respondToRequest(id, simulatedValue);
 });
 
-// Listen for UpdatedRequest events
 oracleContract.on("UpdatedRequest", (id, urlToQuery, attributeToFetch, agreedValue) => {
   console.log(`Request Updated - ID: ${id}, Agreed Value: ${agreedValue}`);
 });
 
-// Example usage
 (async () => {
-  // Create a new request (Example values provided)
-  await createRequest("https://fakestoreapi.com/products/1", "id");
+  await createRequest("https://localhost:3001", "value");
 })();
