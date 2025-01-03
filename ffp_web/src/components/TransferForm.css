@@ -1,0 +1,44 @@
+.transfer-form-container {
+    margin: 40px auto;
+    max-width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fefefe;
+}
+
+.transfer-form-title {
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.transfer-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.transfer-form-label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Style for the displayed login status text */
+.transfer-form-status {
+    margin-bottom: 16px;
+    padding: 8px;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.transfer-form-input {
+    margin-bottom: 16px;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+.transfer-form-button {
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
