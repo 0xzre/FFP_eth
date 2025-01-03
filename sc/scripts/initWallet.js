@@ -2,7 +2,7 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const deployedAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"; // <-- replace with your actual contract address
+  const deployedAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Replace witth FFP Address
 
   const [owner, club, clubOther, player, sponsor, nonRegistered] = await ethers.getSigners();
 

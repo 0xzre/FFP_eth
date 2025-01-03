@@ -7,7 +7,7 @@
     "develop": "nodemon --exec babel-node src",
     "test": "mocha --require babel-core/register",
     "build": "rimraf lib && babel src -d lib",
-    "start": "node lib",
+    "start": "node src",
     "lint": "eslint src"
   },
   "author": "El",

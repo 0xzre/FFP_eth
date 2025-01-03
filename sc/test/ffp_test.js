@@ -1,21 +1,23 @@
 const { expect } = require("chai");
-// const { ethers } = require("hardhat");
 
 describe("FFP", function () {
   let ffpContract, owner, club, clubOther, player, sponsor, nonRegistered;
 
   beforeEach(async function () {
-    // Deploy the contract
+    // Deploy Oracle
+    const Oracle = await ethers.getContractFactory("Oracle");
+    const oracleContract = await Oracle.deploy();
+    const oracleAddress = await oracleContract.getAddress();
+    // Deploy the FFP contract
     const FFP = await ethers.getContractFactory("FFP");
     [owner, club, clubOther, player, sponsor, nonRegistered] = await ethers.getSigners();
-    ffpContract = await FFP.deploy("0x5E00a519A0301486d57AbBd153Bd2F2C2293EBbd");
-    // await ffpContract.deployed();
+    ffpContract = await FFP.deploy(oracleAddress);
 
     // Register wallets
-    await ffpContract.connect(owner).registerClubWallet(club.address, 100);
-    await ffpContract.connect(owner).registerClubWallet(clubOther.address, 50);
-    await ffpContract.connect(owner).registerPlayerWallet(player.address);
-    await ffpContract.connect(owner).registerSponsorWallet(sponsor.address);
+    await ffpContract.connect(owner).registerClubWallet(club.address,"MU", ethers.parseEther("100"));
+    await ffpContract.connect(owner).registerClubWallet(clubOther.address,"PSS SLEMAN", ethers.parseEther("50"));
+    await ffpContract.connect(owner).registerPlayerWallet(player.address, "kopeng");
+    await ffpContract.connect(owner).registerSponsorWallet(sponsor.address, "masjid salman");
   });
 
   it("Should register wallets correctly", async function () {

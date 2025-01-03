@@ -1,12 +1,20 @@
 const hre = require("hardhat");
 
 async function main() {
-    const FFP = await ethers.getContractFactory("FFP");
     [owner, club, clubOther, player, sponsor, nonRegistered] = await ethers.getSigners();
-    ffpContract = await FFP.connect(owner).deploy("0x5E00a519A0301486d57AbBd153Bd2F2C2293EBbd");
+
+    const Oracle = await ethers.getContractFactory("Oracle");
+    const oracleContract = await Oracle.connect(owner).deploy();
+    const oracleAddress = await oracleContract.getAddress();
 
 
-    console.log("MyContract deployed to:", ffpContract.address);
+    const FFP = await ethers.getContractFactory("FFP");
+    const ffpContract = await FFP.connect(owner).deploy(oracleAddress);
+    const ffpAddress = await ffpContract.getAddress();
+
+
+    console.log("Oracle deployed to:", oracleAddress);
+    console.log("FFP deployed to:", ffpAddress);
 }
 
 main().catch((error) => {
