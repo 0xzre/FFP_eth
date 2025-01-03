@@ -55,6 +55,8 @@ contract FFP is Ownable {
         require(bytes(wallets[msg.sender].walletType).length > 0, "Wallet not registered");
         currentclubRevenue[msg.sender] += msg.value;
         wallets[msg.sender].balance += msg.value;
+
+        emit TransferExecuted(msg.sender, msg.sender, msg.value, "deposit");
     }
 
     function withdraw(uint256 amount) external {
