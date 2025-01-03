@@ -1,74 +1,110 @@
+// App.js
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { ABI, SCAddress } from "./Env";
 import TransferForm from "./components/TransferForm";
-
+import HistoryTxns from "./components/HistoryTxns";
+import Deposit from "./components/Deposit";
 import "./App.css";
+import Withdraw from "./components/Withdraw";
 
 function App() {
-  // const [provider, setProvider] = useState(null);
-  // const [network, setNetwork] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [contract, setContract] = useState(null);
-  // const [signer, setSigner] = useState(null);
-  // const [errorTx, setErrorTx] = useState("");
+  const [provider, setProvider] = useState(null);
+  const [address, setAddress] = useState("");
+  const [contract, setContract] = useState(null);
+  const [signer, setSigner] = useState(null);
+  const [balance, setBalance] = useState(null);
 
-  // useEffect(() => {
-  //   const initializeProvider = async () => {
-  //     if (window.ethereum) {
-  //       await window.ethereum.request({ method: "eth_requestAccounts" });
-  //       const provider = new ethers.BrowserProvider(window.ethereum);
-  //       setProvider(provider);
-  //       const signer = await provider.getSigner();
-  //       setSigner(signer);
-  //       setAddress(signer.getAddress());
-  //     }
-  //   };
-  //   initializeProvider();
-  // }, []);
+  // View controller: 'payment' | 'history' | 'deposit'
+  const [activeView, setActiveView] = useState("payment");
 
-  // useEffect(() => {
-  //   if (provider) {
-  //     provider.getNetwork().then((network) => {
-  //       setNetwork(network.name);
-  //     });
-  //   }
-  // }, [provider]);
+  useEffect(() => {
+    const initializeProvider = async () => {
+      if (window.ethereum) {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const browserProvider = new ethers.BrowserProvider(window.ethereum);
+        setProvider(browserProvider);
+        const signer = await browserProvider.getSigner();
+        setSigner(signer);
+        setAddress(await signer.getAddress());
+      }
+    };
+    initializeProvider();
+  }, []);
 
-  // useEffect(() => {
-  //   const getContract = async () => {
-  //     if (provider) {
-  //       const contract = new ethers.Contract(SCAddress, ABI, signer);
-  //       setContract(contract);
-  //     }
-  //   };
-  //   getContract();
-  // }, [provider, signer]);
+  useEffect(() => {
+    const getContract = async () => {
+      if (provider && signer) {
+        const c = new ethers.Contract(SCAddress, ABI, signer);
+        setContract(c);
 
-  // const interactWithContract = async () => {
-  //   if (contract) {
-  //     try {
-  //       // Replace with actual wallet and type
-  //       // const tx = await contract.registerWallet(address, "club");
-  //       console.log('entered interact')
-  //       const tx = contract.registerWallet(address, "club");
-  //       const gas = await signer.estimateGas(tx);
-  //       console.log('gas:', gas);
-  //       console.log("Transaction sent:", tx.hash);
+        // Example: retrieve contract's "balance" for the connected user
+        const balanceBn = await c.getBalance();
+        const formatted = ethers.formatEther(balanceBn);
+        setBalance(Number(formatted));
+      }
+    };
+    getContract();
+  }, [provider, signer]);
 
-  //       // Wait for the transaction to be mined
-  //       const receipt = await tx.wait();
-  //       console.log("Transaction mined:", receipt);
-  //     } catch (error) {
-  //       setErrorTx(error.message);
-  //     }
-  //   }
-  // };
+  // Simple navigation bar for switching views
+  const renderNavigation = () => {
+    return (
+      <nav className="app-nav">
+        <button
+          className={activeView === "payment" ? "active" : ""}
+          onClick={() => setActiveView("payment")}
+        >
+          Payment
+        </button>
+        <button
+          className={activeView === "history" ? "active" : ""}
+          onClick={() => setActiveView("history")}
+        >
+          History
+        </button>
+        <button
+          className={activeView === "deposit" ? "active" : ""}
+          onClick={() => setActiveView("deposit")}
+        >
+          Deposit
+        </button>
+        <button
+          className={activeView === "withdraw" ? "active" : ""}
+          onClick={() => setActiveView("withdraw")}
+        >
+          Withdraw
+        </button>
+      </nav>
+    );
+  };
+
+  // Conditionally render one of the features
+  const renderActiveFeature = () => {
+    if (activeView === "payment") {
+      return <TransferForm contract={contract} />;
+    } else if (activeView === "history") {
+      return <HistoryTxns contract={contract} />;
+    } else if (activeView === "deposit") {
+      return <Deposit contract={contract} />;
+    } else if (activeView === "withdraw") {
+      return <Withdraw contract={contract} />;
+    }
+  };
 
   return (
     <div className="app-container">
       <h1 className="app-title">Financial Fairplay</h1>
-      <TransferForm />
+      <div className="app-status">
+        <p>Address: {address}</p>
+        <p>Balance in FFP Contract: {balance} ETH</p>
+      </div>
+
+      {renderNavigation()}
+
+      <div className="app-content">
+        {renderActiveFeature()}
+      </div>
     </div>
   );
 }
