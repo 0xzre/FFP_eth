@@ -22,3 +22,4 @@ build
 contracts/artifacts
 artifacts
 cache
+package-lock.json
